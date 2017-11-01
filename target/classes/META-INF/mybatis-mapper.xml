@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="BoardMapper">
+
+	<select id="boardList" parameterType="java.util.List" resultType="com.java119.test01.BoardVO">
+<!-- 		select fblistno, fbsubject, fbwriter, fbwritedate from fbbase -->
+		select b_no, b_title, b_writer, b_contents, reg_date from board
+	</select>
+	
+	<select id="boardDetail" parameterType="com.java119.test01.BoardVO" resultType="com.java119.test01.BoardVO">
+		select b_no, b_title, b_writer, b_contents, reg_date, file_path
+		from board 
+		where b_no=#{b_no}
+	</select>
+		
+	<update id="boardUpdate"></update>
+	
+	<insert id="boardWrite" parameterType="com.java119.test01.BoardVO" >
+		insert into board(b_no, b_title, b_writer, b_contents, reg_date, file_path )
+		values (board_no_seq.nextval, #{b_title}, #{b_writer}, #{b_contents}, sysdate, #{file_path})
+	</insert>
+	
+	<delete id="boardDelete"></delete>
+
+</mapper>
